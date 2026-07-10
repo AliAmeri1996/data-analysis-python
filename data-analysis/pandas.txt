@@ -1,0 +1,27 @@
+Pandas — the core ones:
+
+pythondf.head(), df.tail()    # peek at data
+df.describe()                 # summary stats
+df.info()                     # column types, nulls
+df.isnull().sum()             # count missing values
+df.dropna()                   # remove missing values
+df.fillna(0)                  # fill missing values
+df['col'].mean()              # average
+df['col'].max(), .min()       # max/min
+df.groupby('col').mean()      # group and aggregate
+df.sort_values(by='col')      # sort
+df[df['col'] > 100]           # filter rows
+df['new_col'] = ...           # create new column
+df.rename(columns={})         # rename columns
+df.drop(columns=['col'])      # delete column
+
+
+
+
+Pandas — finance specific:
+
+pythondf['col'].pct_change()        # daily % return
+df['col'].rolling(30).mean()  # moving average
+df['col'].std()               # volatility
+df['col'].cumsum()            # cumulative sum
+df['col'].corr(df['col2'])    # correlation between two columns
