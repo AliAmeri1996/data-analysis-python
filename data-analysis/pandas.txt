@@ -49,5 +49,22 @@ This is called exploratory data analysis (EDA).
 2-Clean = fix any issues you found
 Cleaning is about fixing problems in your data before you analyse it. The main things you'd check for:
 
+1. Missing values — most common issue
+pythonprint(oil.isnull().sum())  # count missing values per column
+
+oil.dropna()               # remove rows with any missing value
+oil.fillna(0)              # fill missing with 0
+oil.fillna(method='ffill') # fill with previous day's value (common in finance)
+2. Duplicate rows
+pythonprint(oil.duplicated().sum())  # count duplicates
+oil.drop_duplicates()          # remove them
+3. Wrong data types
+pythonprint(oil.dtypes)              # check types
+oil['Volume'] = oil['Volume'].astype(int)  # convert to integer
+4. Renaming messy column names
+pythonoil.rename(columns={'Close': 'close_price'}, inplace=True)
+5. Removing columns you don't need
+pythonoil.drop(columns=['Volume'], inplace=True)
+
 
 
