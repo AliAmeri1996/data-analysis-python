@@ -31,7 +31,7 @@ df['col'].corr(df['col2'])    # correlation between two columns
 
 
 
-In reading data from a file, the very first thing you must do as a coder you must get to know the data, what it contains. the folloiwng codes are for oil which shows what we got in the oil file from the Yahoo.
+1- Explore= In reading data from a file, the very first thing you must do as a coder you must get to know the data, what it contains. the folloiwng codes are for oil which shows what we got in the oil file from the Yahoo.
 
 
 print(oil.columns)       # what columns exist
@@ -43,3 +43,11 @@ print(oil.isnull().sum()) # any missing values?
 
 
 This is called exploratory data analysis (EDA).
+
+
+
+2-Clean = fix any issues you found
+Cleaning is about fixing problems in your data before you analyse it. The main things you'd check for:
+
+
+
