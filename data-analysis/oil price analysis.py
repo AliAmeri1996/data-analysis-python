@@ -93,16 +93,16 @@ print("best day date:", oil['Daily_Return'].idmax())
 
 
 
+'''4- Visualisation — plotting what you found so it's easier to understand and present.'''
 
 
 
-# """now lets visulise the data with matplotlib"""
 
-# oil['MA30']=oil['Close'].rolling(30).mean()
-# oil['Close'].plot(label='Close Price', figsize=(12,6))
-# oil['MA30'].plot(label='30 Day MA')
-# plt.title('WTI Crude Oil Price 2020-2024')
-# plt.xlabel('Date')
-# plt.ylabel('Price (USD)')
-# plt.legend()
-# plt.show()
+oil['MA30']=oil['Close'].rolling(30).mean()
+oil['Close'].plot(label='Close Price', figsize=(12,6))
+oil['MA30'].plot(label='30 Day MA')
+plt.title('WTI Crude Oil Price 2020-2024')
+plt.xlabel('Date')
+plt.ylabel('Price (USD)')
+plt.legend()
+plt.show()
