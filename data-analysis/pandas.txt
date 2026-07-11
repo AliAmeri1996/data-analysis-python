@@ -25,3 +25,21 @@ df['col'].rolling(30).mean()  # moving average
 df['col'].std()               # volatility
 df['col'].cumsum()            # cumulative sum
 df['col'].corr(df['col2'])    # correlation between two columns
+
+
+
+
+
+
+In reading data from a file, the very first thing you must do as a coder you must get to know the data, what it contains. the folloiwng codes are for oil which shows what we got in the oil file from the Yahoo.
+
+
+print(oil.columns)       # what columns exist
+print(oil.shape)         # how many rows/columns
+print(oil.head())        # first 5 rows
+print(oil.dtypes)        # data types of each column
+print(oil.describe())    # summary stats
+print(oil.isnull().sum()) # any missing values?
+
+
+This is called exploratory data analysis (EDA).
