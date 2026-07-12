@@ -68,3 +68,18 @@ pythonoil.drop(columns=['Volume'], inplace=True)
 
 
 
+If we want to read things from a file, this is how's done
+
+# CSV file
+df = pd.read_csv('filename.csv')
+
+# Excel file
+df = pd.read_excel('filename.xlsx')
+
+# JSON file
+df = pd.read_json('filename.json')
+
+
+
+
+

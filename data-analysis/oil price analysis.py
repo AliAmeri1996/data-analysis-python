@@ -4,13 +4,15 @@ so everything you do after (.head(), .describe(), .groupby(), .mean() etc.) is a
  That's exactly why we imported pandas at the top."""
 
 
-import matplotlib.pyplot as plt 
+import matplotlib.pyplot as plt
 import yfinance as yf
-import pandas as pd 
+import pandas as pd
 
 oil=yf.download('CL=F', start='2020-01-01',end='2024-12-31')#CL=F is the ticker symbol for WTI Crude Oil Futures on Yahoo Finance.in this line you can add interval='1wk' too
 #BZ=FBrent Crude Oil
-oil.columns = ['Close', 'High', 'Low', 'Open', 'Volume']
+oil = oil.droplevel(1, axis=1)
+
+
 
 
 
@@ -33,25 +35,25 @@ oil['Mean'] = oil['Close'].mean()# if we want to make a column we first have to 
 '''2- cleaning the data=Cleaning is about fixing problems in your data before you analyse it. The main things you'd check for:'''
 
 print(oil.isnull().sum())# count missing values per column
-oil.dropna()# remove rows with any missing value, no need to print 
-oil.fillna(0)# fill missing with 0,no need to print 
-oil.fillna(method='ffill')# fill with previous day's value (common in finance),no need to print 
+oil=oil.dropna()# remove rows with any missing value, no need to print 
+oil=oil.fillna(0)# fill missing with 0,no need to print 
+oil=oil.fillna(method='ffill')# fill with previous day's value (common in finance),no need to print 
 
-#duplicate rows 
+#duplicate rows
 print(oil.duplicated().sum()) # count duplicatess
-oil.drop_duplicates()
+oil=oil.drop_duplicates()
 
 
 #Wrong data types
 print(oil.dtypes) # check types
-oil['Volume']=oil['volume'].astype(int) # convert to integer
+oil['Volume']=oil['Volume'].astype(int) # convert to integer
 
 
 #renaming messy columns names 
-oil.rename(columns={'Close':'close_price'},inplace=True)\
+# oil.rename(columns={'Close':'close_price'},inplace=True)\
 
 #renaming columns you dont need
-oil.drop(columns=['Volume'],inplace=True)
+# oil.drop(columns=['Volume'],inplace=True)
 
 
 
@@ -60,7 +62,7 @@ oil.drop(columns=['Volume'],inplace=True)
 '''3- analysing the data now '''
 
 
-#30-day rolling average ,average closing price over the last 30 days
+# #30-day rolling average ,average closing price over the last 30 days
 oil['MA30']=oil['Close'].rolling(30).mean()
 
 # Daily % change
@@ -78,6 +80,7 @@ print("Days above $80:",len(oil_busy))
 
 
 # 2. Volatility per year (how much prices jumped around)
+oil['Year'] = oil.index.year
 print(oil.groupby('Year')['Close'].std())
 
 
@@ -85,7 +88,7 @@ print(oil.groupby('Year')['Close'].std())
 oil['Daily_Return'] = oil['Close'].pct_change() * 100
 print("best day in oil market:", oil["Close"].max())
 print("worst close day in the oil market:",oil['Close'].min())
-print("best day date:", oil['Daily_Return'].idmax())
+print("best day date:", oil['Daily_Return'].idxmax())
 
 
 
@@ -99,7 +102,7 @@ print("best day date:", oil['Daily_Return'].idmax())
 
 
 oil['MA30']=oil['Close'].rolling(30).mean()
-oil['Close'].plot(label='Close Price', figsize=(12,6))
+oil['Close'].plot(label='Close Price', figsize=(12,6))#label is what shows up in the legend box for each line.
 oil['MA30'].plot(label='30 Day MA')
 plt.title('WTI Crude Oil Price 2020-2024')
 plt.xlabel('Date')
